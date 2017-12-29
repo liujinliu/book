@@ -2,7 +2,7 @@
 作者：Michael Nielsen
 英文在线：http://neuralnetworksanddeeplearning.com/index.html
 
-# 一. 使用神经网络识别手写数字
+# 使用神经网络识别手写数字
  人类的视觉系统是世界上最美妙的系统之一。考虑下面的手写数字  
  <!--more-->  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/1?raw=true)  
