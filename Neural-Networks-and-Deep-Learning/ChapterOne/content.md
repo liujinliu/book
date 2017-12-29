@@ -45,3 +45,13 @@
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/8.png?raw=true)  
 使用两输入的预测器替代与非门, 权重设置为-2, 偏执设置为3, 我们可以得到一个预测器的网络.  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/9.png?raw=true)  
+一个需要注意的地方是上面这个网络, 最左边预测器的输出被当作最下面的预测器的输入被使用了两次.当我定义预测器时候我并没有说这种情况是否允许, 事实上这样做是没有问题的. 当然如果你不想看到这样, 我们大可以将那两条线合并成一条, 但这样权重就变为-4, 像下面这样:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/10.png?raw=true)  
+实际上, 我们还可以多画一层预测器, 像下面这样  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/11.png?raw=true)  
+这种画法, 有输出没输入, 只是我们做的一个简化记号, 并不意味着一个没有输入的预测器.  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/12.png?raw=true)  
+想象一下, 如果真的有这样一个预测器, 那么显然\\(\sum_jw_jx_j\\)会衡等于0, 也就是说预测器的输出将完全取决于偏置. 因此输入预测器仅仅提供输入, 这样理解是比较合理的.  
+上面的加法器的例子如何使用预测器来仿真一个包含多个与非门的电路. 然而因为与非门是可以应用于通用计算的, 所以预测器也可以用于通用的计算领域.  
+这个结论既让人高兴也让人失望. 让人高兴的是预测器可以像其他计算设备一样具有强大的计算能力, 但让人失望的是看起来预测器不过是一个新的类型的与非门, 这可不是什么大新闻.  
+然而, 这个实验依然揭示了一点, 就是我们可以在这个神经元基础上开发一种学习算法, 可以自适应的调整自己的权重和偏置. 权重和偏置并非由程序直接生成, 而且根据对外部仿真的响应来调整参数. 通过简单的学习去解决问题, 而不是像传统思想一样事先摆好一堆与非门, 我们的神经网络可以处理很多在传统逻辑上很难解决的问题.  
