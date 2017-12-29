@@ -63,3 +63,7 @@
 我们可以解决这个问题---引入一个新的神经网络, Sigmoid型神经网络, 我接下来都称其为S型神经网络. S型神经网络跟预测器有点类似, 但是它可以保证一个小的权重或是偏置的变化仅仅会在输出上引起一个小的变化. 正是这一点使得S型神经网络可以进行学习进化.  
 好的, 现在我来描述下S型神经网络, 这初看起来跟我之前描述的预测器是一样的.  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/14.png?raw=true)  
+就像一个预测器, S型神经元同样包含一些输入\\(x_1,x_2,x_3......\\), 但不一定是0/1, 这些输入可以在0和1之间任意取值. 同样的, S性神经元同样包含一系列权重\\(w_1,w_2,w_3......\\)和一个全局的偏置\\(b\\). 但输出不是0/1, 而是一个Sigmoid函数所表示的结果\\(\sigma(w \cdot x+b)\\):  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/15.png?raw=true)  
+写的更确切一点是像下面这样, 输入\\(x_1,x_2,x_3......\\), 权重\\(w_1,w_2,w_3.....\\)和偏置\\(b\\)的S型神经元的输出:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/16.png?raw=true)  
