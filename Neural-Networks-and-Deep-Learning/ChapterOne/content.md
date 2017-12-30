@@ -83,3 +83,5 @@
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/20.png?raw=true)  
 最左边叫做输入层, 其中的神经元叫输入神经元, 最右边叫做输出层, 包含一个输出神经元. 中间的这层叫做隐藏层, 因为这一层神经元既不是输人也不是输出. "隐藏"这个词乍一听有点神秘---当我第一次听说的时候我也以为这一定表示什么高深的数学概念, 但相信我, 它仅仅表示这一层既不是输入也不是输出. 上面这个例子只包含一个隐藏层, 实际上有些, 甚至是大多数神经网络都有多层隐藏层, 下面这个四层神经网络就包含两个隐藏层:  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/21.png?raw=true)  
+因为历史原因, 这样的多层网络有时候也被称为多层预测器或是MLPs(multilayer perceptrons), 因为这个网络是由S型神经元组成的, 而不是预测器, 所以接下来我将会使用MLP这个术语, 因为我觉得这容易有些混淆, 所以在此特别说一下.  
+网络的输入和输出设计通常都是很简单的.  
