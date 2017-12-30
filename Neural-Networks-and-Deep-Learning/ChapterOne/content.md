@@ -67,3 +67,5 @@
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/15.png?raw=true)  
 写的更确切一点是像下面这样, 输入\\(x_1,x_2,x_3......\\), 权重\\(w_1,w_2,w_3.....\\)和偏置\\(b\\)的S型神经元的输出:  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/16.png?raw=true)  
+第一眼看上去, S型神经元与预测器差别很大. Sigmoid函数看起来有点晦涩. 事实上, S型神经元跟预测器有很多类似的地方, 上面的公式体现的不过是一个技术上的细节, 不应该成为我们理解上的障碍.  
+为了理解S型神经元与预测器的相似之处, 假设\\(z \equiv w \cdot x+b\\)是一个很大的整数. 那么\\(e^{-z} \approx 0 \\) , \\(\sigma (z) \approx 1\\). 换句话说, \\(z=w \cdot x+b\\) 是一个很大的正数, 这个S型神经元的输出就会非常接近1.  反过来, 如果\\(z=w \cdot x+b\\)是一个很小的负数, 那么\\(e^{-z} \approx \infty\\), \\(\sigma (z) \approx 0\\). 以上的表现都使得S型神经元跟预测器有很多相似之处. 当然在大部分情况下\\(z=w \cdot x+b\\)根据模型的情况会有一个适度的大小, 这使得S型神经元跟预测器有较大的不同.
