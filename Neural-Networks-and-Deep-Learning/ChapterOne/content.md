@@ -127,4 +127,4 @@ MINIST数据包含两部分, 第一部分包含60000个图像作为训练数据.
 根据我的描述, 也许你会认为我该谈什么牛顿的经典力学公式了. 事实上我们不会纠结于物理公式, 我们目的是找到函数\\(C\\)的最小值, 球的例子只是激发我们的想法. 现在假设我们就是上帝, 我们如何设计一套规则来让小球始终向着山谷的下面运动呢 ?  
 现在, 让我们假设我们让球在\\(v_1\\)方向移动了一点点\\(\Delta v_1\\), 在\\(v_2\\)方向移动了一点点\\(\Delta v_2\\), 通过计算我们可以得到\\(C\\)的变化近似满足下面的条件:  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/32.png?raw=true)  
-我们将和找到一种方式得到\\(\Delta v_1\\), \\(\Delta v_2\\), 使得\\(\Delta C\\)是负数. 这样就能保证我们的小球是向山谷下方运动的. 我们定义\\(\Delta v\\)表示\\(v\\)的变化, \\(\Delta v \equiv (\Delta v_1, \Delta v_2)^T\\), 我们同时定义\\(C\\)的梯度为\\({\partial C} \over {\partial v_1}, {\partial C} \over {\partial v_2}\\)
+我们将和找到一种方式得到\\(\Delta v_1\\), \\(\Delta v_2\\), 使得\\(\Delta C\\)是负数. 这样就能保证我们的小球是向山谷下方运动的. 我们定义\\(\Delta v\\)表示\\(v\\)的变化, \\(\Delta v \equiv (\Delta v_1, \Delta v_2)^T\\), 我们同时定义\\(C\\)的梯度为\\((\frac{\partial C}{\partial v_1}, \frac{\partial C}{\partial v_2})^T\\).
