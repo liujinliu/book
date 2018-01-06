@@ -133,4 +133,4 @@ MINIST数据包含两部分, 第一部分包含60000个图像作为训练数据.
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/34.png?raw=true)  
 这个公式解释了为什么\\(\nabla C\\)叫做梯度向量: \\(\nabla C\\)反映了\\(v\\)的变化如何对应\\(C\\)的变化. 这个公式更令人兴奋的一点是, 它表明了我们应该如何选择\\(\Delta v\\)使得\\(\Delta C\\)是负数.  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/35.png?raw=true)  
-\\(\eta\\)是一个比较小的正数(也被称作学习速率). 这样公式(9)告诉我们\\(\Delta C=-\eta {|| \nabla ||}^2\\)
+\\(\eta\\)是一个比较小的正数(也被称作学习速率). 这样公式(9)告诉我们\\(\Delta C=-\eta {|| \nabla C||}^2\\)
