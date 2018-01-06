@@ -133,4 +133,11 @@ MINIST数据包含两部分, 第一部分包含60000个图像作为训练数据.
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/34.png?raw=true)  
 这个公式解释了为什么\\(\nabla C\\)叫做梯度向量: \\(\nabla C\\)反映了\\(v\\)的变化如何对应\\(C\\)的变化. 这个公式更令人兴奋的一点是, 它表明了我们应该如何选择\\(\Delta v\\)使得\\(\Delta C\\)是负数.  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/35.png?raw=true)  
-\\(\eta\\)是一个比较小的正数(也被称作学习速率). 这样公式(9)告诉我们\\(\Delta C=-\eta {|| \nabla C||}^2\\)
+\\(\eta\\)是一个比较小的正数(也被称作学习速率). 这样公式(9)告诉我们\\(\Delta C=-\eta {|| \nabla C||}^2\\). 显然, 这可以保证\\(\Delta C \leq 0\\). 因此, 我们使用公式(10)计算\\(\Delta v\\), 然后根据下面的公式移动小球:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/36.png?raw=true)  
+我们会一直使用这个公式, 直到得到全局的最小值的点.  
+总结一下, 梯度下降算法就是计算梯度\\(\nabla C\\), 然后让小球朝相反的方向运动.像下面这样:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/37.png?raw=true)  
+为了使得梯度下降算法正确的工作, 我们需要选择足够小的\\(\eta\\)以使得公式(9)是一个比较好的近似. 否则我们很可能得到\\(\Delta C>0\\), 这显然不是想看到的. 当然, 我们也不希望\\(\eta\\)太小, 这样我们每次移动的就会特别小, 然后整个算法运行起来就会特别慢. 在实际使用中, \\(\eta\\)是经常变化的, 以使得公式(9)是一个比较好的近似, 然后整个算法运行的又不是特别慢.  
+我之前举例子使用的是两个变量的函数, 事实上对任意多变量, 我们的算法都可以很好的工作. 假设\\(C\\)包含\\(m\\)个变量, \\(v_1,......v_m\\), 我们选取\\(\Delta v=(\Delta v_1,......,\Delta v_m)^T\\), 那么我们可以得到下面的公式:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/38.png?raw=true)  
