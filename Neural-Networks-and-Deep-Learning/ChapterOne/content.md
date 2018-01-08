@@ -141,3 +141,12 @@ MINIST数据包含两部分, 第一部分包含60000个图像作为训练数据.
 为了使得梯度下降算法正确的工作, 我们需要选择足够小的\\(\eta\\)以使得公式(9)是一个比较好的近似. 否则我们很可能得到\\(\Delta C>0\\), 这显然不是想看到的. 当然, 我们也不希望\\(\eta\\)太小, 这样我们每次移动的就会特别小, 然后整个算法运行起来就会特别慢. 在实际使用中, \\(\eta\\)是经常变化的, 以使得公式(9)是一个比较好的近似, 然后整个算法运行的又不是特别慢.  
 我之前举例子使用的是两个变量的函数, 事实上对任意多变量, 我们的算法都可以很好的工作. 假设\\(C\\)包含\\(m\\)个变量, \\(v_1,......v_m\\), 我们选取\\(\Delta v=(\Delta v_1,......,\Delta v_m)^T\\), 那么我们可以得到下面的公式:  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/38.png?raw=true)  
+梯度向量\\(\nabla C\\)如下:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/39.png?raw=true)  
+跟两个参数的做法一样, 我们按下面的公式选择\\(\Delta v\\):  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/40.png?raw=true)  
+重复下面的步骤, 我们就可以找到\\(C\\)的最小值的点:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/41.png?raw=true)  
+上面的公式给了我们一个迭代得到\\(C\\)的最小值位置的方式, 但上面的公式并不总是能够按照我们预期的那样去工作, 有很多因素会影响到算法的执行效果. 我们接下来的章节会讨论这些问题, 但是在实际中, 梯度下降算法通常都工作的很好, 尤其是在神经网络中, 我们会发现梯度下降算法有强大的能力.  
+事实上, 直观上我们也能感觉到梯度下降算法是寻找最小值的最佳策略. 假设我们需要在\\(C\\)下降最快的方向上移动一小步\\(\Delta v\\), 这等同于最小化\\(Delta C \approx \nabla C \cdot \Delta v\\)我们限制每一次移动的距离\\(||\Delta v|| = \epsilon\\). 换句话说, 我们每一次移动的是一个固定距离, 然后我们尝试选择一个移动方向使得\\(C\\)减小的最快. 我们可以证明\\(\Delta v=-\eta \nabla C\\), \\(\eta = \epsilon / ||\nabla C||\\)正是我们要找的. 因此, 梯度下降算法可以认为是在\\(C\\)下降最快方向上寻找最小值点的算法. 	
+人们研究了很多梯度的计算方法, 比如模拟真是球体滚落的方法, 这种方法有优点也有缺点, 一个主要的缺点是这种方式需要计算函数的二阶导数, 这是非常耗时的. 假设我们需要针对所有变量求解
