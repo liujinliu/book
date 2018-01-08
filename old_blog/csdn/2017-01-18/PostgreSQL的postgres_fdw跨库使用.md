@@ -1,4 +1,5 @@
 ﻿# postgres_fdw简介
+ <!--more-->  
 fdw是foreign-data wrapper的一个简称，可以叫外部封装数据。
 postgres_fdw实现的是各个postgresql数据库及远程数据库之间的跨库操作。
 ### 下载mysql_fdw

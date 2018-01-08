@@ -1,4 +1,5 @@
 ﻿主要是使用boto模块 
+<!--more-->  
 #### 建立连接
 ```
 import boto

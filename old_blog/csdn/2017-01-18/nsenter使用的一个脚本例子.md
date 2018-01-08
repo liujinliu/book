@@ -1,4 +1,5 @@
 ﻿下面是一个通过nsenter进入docker容器的例子脚本：
+ <!--more-->  
 文件名字：ns
 使用方法：将文件放入系统PATH路径下，进入容器方式```ns <container-name/container-id>```
 ```

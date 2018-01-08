@@ -1,5 +1,6 @@
 ﻿[cassandra](http://cassandra.apache.org)是当下流行的nosql数据库，基于google big table的理论。
 这篇文章主要是记录自己搭建cassandra集群的过程，更重要的是监控系统的搭建过程，对这种基础设施来说，没有监控就是裸奔，裸奔就相当与*定时炸弹*。
+ <!--more-->  
 ### 1. 集群搭建：
 system-info: ubuntu16.04
 这里采用debian二进制包的方式安装，这一步也可以采用源码。

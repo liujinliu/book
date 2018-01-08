@@ -1,4 +1,5 @@
 ﻿[locust](http://locust.io/)的基本使用方法可以直接参考[官方文档](http://docs.locust.io/en/latest/quickstart.html)  
+ <!--more-->  
 这里主要记下一些使用时候遇到的细节需要注意的地方
 
 ### 1. --no-web的使用

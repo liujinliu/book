@@ -1,4 +1,5 @@
 ﻿转自：http://www.cnblogs.com/ccdc/p/4069112.html
+ <!--more-->  
 ### 安装
 ```
 #尤其重要，否则会报错

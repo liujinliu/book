@@ -1,5 +1,6 @@
 ﻿参考原文：http://blog.csdn.net/dyllove98/article/details/9750251
 这里说下vim下python编辑器的简单配置
+ <!--more-->  
 ### 安装ctags
 ```
 $ apt-get install ctags

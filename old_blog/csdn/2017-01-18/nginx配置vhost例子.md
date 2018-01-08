@@ -1,4 +1,5 @@
 ﻿nginx下面几个配置vhost的例子
+ <!--more-->  
 php
 ```
 server {

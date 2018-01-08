@@ -1,4 +1,5 @@
 ﻿最近在一次开发过程中，将数据写入mysql时候总是报```MySQL server has gone away```的错误，因为mysql就是本地启动的，而且从插入到报错整个过程时间很短，因此不可能是连接方面的timeout一类的问题。最后通过网上搜索，看到了遇到类似问题的[帖子](http://blog.csdn.net/fdipzone/article/details/51974165)，参考作者的做法，问题得到了解决。   
+ <!--more-->  
 原因是max_allowed_packet参数导致的。按照官方解释增大这个参数可以使得从client到server端传递大数据时，系统能够分配更多的扩展内存来处理。   
 首先查看mysql max_allowed_packet的值
 ```

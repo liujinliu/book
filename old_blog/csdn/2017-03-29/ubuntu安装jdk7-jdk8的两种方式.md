@@ -1,4 +1,5 @@
-﻿原文地址：http://www.cnblogs.com/a2211009/p/4265225.html
+﻿原文地址：http://www.cnblogs.com/a2211009/p/4265225.html 
+ <!--more-->  
 
 ubuntu安装jdk有两种方式
 

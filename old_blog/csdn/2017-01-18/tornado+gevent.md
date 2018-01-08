@@ -1,6 +1,7 @@
 ﻿http://stackoverflow.com/questions/13292407/how-to-improve-the-performance-of-the-combination-of-gevent-and-tornado?rq=1  
 在stackoverflow上看到有人给出了将tornado和gevent结合的编码例子，记在这里，便于以后查阅。细节待有时间在补充吧
 这是第一段
+ <!--more-->  
 ```
 # Gevent monkeypath
 from gevent import monkey

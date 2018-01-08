@@ -1,4 +1,5 @@
 ﻿#  ImageMagick安装
+ <!--more-->  
 ubuntu下安装
 sudo apt-get install libmagickwand-dev
 其他系统安装方法可以参考

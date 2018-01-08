@@ -1,4 +1,5 @@
 ﻿#### rabbitmq最新版本在外部的访问权限上进行了进一步的控制，其中默认情况下，guest用户只能通过本地loopback端口访问
+ <!--more-->  
 为了在外部对rabbitmq进行连接和访问，需要新增用户，对用到的命令进行简单记录
 ```
 rabbitmqctl add_user <username> <userpass>

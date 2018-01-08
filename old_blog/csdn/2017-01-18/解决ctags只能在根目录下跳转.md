@@ -1,5 +1,5 @@
 ﻿原文链接:http://blog.chinaunix.net/uid-26557245-id-3594974.html
-
+ <!--more-->  
 使用 ctags -R,再用vim打开其目录下的源文件时，出现了
 
 cstag:tag not found

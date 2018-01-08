@@ -1,4 +1,5 @@
 ﻿### 环境
+ <!--more-->  
 ```
 liujinliu@liujinliu-OptiPlex-7010:~$ uname -a
 Linux liujinliu-OptiPlex-7010 4.4.0-57-generic #78-Ubuntu SMP Fri Dec 9 23:50:32 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux

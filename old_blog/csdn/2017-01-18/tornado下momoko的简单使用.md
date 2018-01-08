@@ -1,5 +1,6 @@
 ﻿最近在项目中实现一个server的时候采用了tornado，需要连接pg数据库，于是接触并使用了momoko，在这里做一些简单记录
 model.py
+ <!--more-->  
 ```
 #coding=utf-8
 from tornado import gen

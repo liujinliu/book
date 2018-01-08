@@ -1,4 +1,5 @@
 ﻿转自：http://www.cnblogs.com/xiazh/archive/2012/12/12/2814289.html
+ <!--more-->  
 在安装 mysql-python时，会出现：
 ```
 sh: mysql_config: not found

@@ -1,5 +1,6 @@
 ﻿
 ## 环境准备
+<!--more-->  
 ```
 centos6
 $ uname -a

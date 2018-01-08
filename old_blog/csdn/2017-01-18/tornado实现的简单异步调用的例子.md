@@ -1,6 +1,7 @@
 ﻿tornado是python实现的一个异步web框架
 除了写web服务实现web api供人调用之外，自己想写一个简单的http访问，于是有了下面的代码，尽供自己记录用，其实也可以用来平时写tornado代码简单进行功能调试使用参考
 test.py
+ <!--more-->  
 ```
 #coding=utf-8
 import tornado.ioloop

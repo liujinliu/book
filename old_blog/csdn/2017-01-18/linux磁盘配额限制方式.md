@@ -1,4 +1,5 @@
 ﻿最近研究docker的磁盘配额限制，貌似官方最新版本的docker已经支持，底层用的是linux的quota，于是自己对quota进行了简单的尝试，记录于此。本文将演示如何创建一个gquota的用户组，并对这个用户组下的用户进行磁盘配额限制。
+ <!--more-->  
 #### 查看内核是否支持
 ```
 # grep CONFIG_QUOTA /boot/config-[version]

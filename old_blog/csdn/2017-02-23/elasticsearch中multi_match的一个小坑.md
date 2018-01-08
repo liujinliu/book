@@ -1,4 +1,5 @@
 ﻿最近在使用elasticsearch的multi_match搜索时候，使用下面的body对一个字段下的所有字段进行递归搜索，但是当这些子字段出现数值类型的时候，就会报异常了，具体讨论可以参考   
+ <!--more-->  
 https://github.com/elastic/elasticsearch/issues/3975
 解决方法是加入```lenient```字段，参考下面的body
 ```

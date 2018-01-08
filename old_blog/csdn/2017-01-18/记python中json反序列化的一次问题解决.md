@@ -1,4 +1,5 @@
 ﻿最新在tornado接收body为json数据时，进行json的反序列化时候遇到一个问题，输入如下：
+ <!--more-->  
 ```
  body='{\n\t"pts":[\n\t\t{\n\t\t\t"ddlSqls":"create table user1(ID Varchar(20) NOT NULL, name Varchar(20))",\n\t\t\t"type":"CREATE"\n\t\t},\n\t\t{\n\t\t\t"tbName":"user1",\n\t\t\t"ddlSqls":"add column age int,drop column name",\n\t\t\t"type":"ALERT"\n\t\t},\n\t\t]\n}'
 ```
