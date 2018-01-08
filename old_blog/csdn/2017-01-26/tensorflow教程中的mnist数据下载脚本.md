@@ -5,5 +5,5 @@ https://github.com/liujinliu/tensor_mnist
 大家可以直接fork我这份工程，或是直接把代码down下来，这里边包含了mnist图片文件。main.py就是描述的[这篇教程](http://www.tensorfly.cn/tfdoc/tutorials/mnist_beginners.html)的第一部分的内容。  可以在安装tensorflow之后直接运行这个文件。
  
 ####另外安利我写的两个模块，欢迎使用或贡献代码：
-[一个命令行版本的zookeeper cli](https://pypi.python.org/pypi/zoo_cmd)
+[一个命令行版本的zookeeper cli](https://pypi.python.org/pypi/zoo_cmd)  
 [一个tornado web app框架快速生成工具](https://pypi.python.org/pypi/twapp)
