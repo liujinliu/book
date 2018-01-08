@@ -46,6 +46,7 @@ rpc_address： 192.168.1.101
 1.  下载[metrics-graphite-3.1.0.jar](http://search.maven.org/#artifactdetails|com.yammer.metrics|metrics-graphite|3.1.0|jar)，这需要与你使用的cassandra版本一致。
 2.   jar包放入/usr/share/cassandra/lib/
 3.  在 /etc/cassandra/目录下创建一个上报状态的配置文件metrics_reporter_graphite.yaml，文件名可以自己随意指定
+
 ```
 graphite:
   -
@@ -63,11 +64,13 @@ graphite:
         - '^jvm.+'
 ```
 4. 将下面的内容加入cassandra-env.sh
+
 ```
 METRICS_REPORTER_CFG="metrics_reporter_graphite.yaml"
 JVM_OPTS="$JVM_OPTS -Dcassandra.metricsReporterConfigFile=$METRICS_REPORTER_CFG"
 ```
 #### 2) 安装配置Graphite
+
 ```
 ## Install Graphite-carbon and Graphite-web
 sudo apt-get install graphite-web graphite-carbon
@@ -103,6 +106,7 @@ sudo service carbon-cache start
 上面的配置几乎全copy自参考的那篇博客，除了这里没有使用postgresql，而是使用django默认的数据库(sqlite)
 #### 3) 安装配置Grafana
 grafana这里使用postgresql数据库，首先安装postgresql
+
 ```
 ## Install Postgres SQL database server
 sudo apt-get update
@@ -112,6 +116,7 @@ CREATE USER cassmon WITH PASSWORD 'some_password';
 CREATE DATABASE grafana WITH OWNER cassmon;
 ```
 安装配置grafana
+
 ```
 ## Install Grafana
 sudo apt-get install grafana
