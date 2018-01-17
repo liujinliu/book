@@ -191,3 +191,18 @@ Network对象中的偏置和权重都是随机初始化的，随机数来自于�
 偏置和权重被存储为Numpy的矩阵列表。 例如```net.weights [1]```是一个Numpy矩阵，存储连接第二层到第三层神经元连接的权重(Python的列表索引从0开始). 我们用矩阵\\(w\\)来表示```net.weights [1]```.  \\(w_jk\\)表示第二层中的第\\(k\\)个神经元和第三层中的第\\(j\\)个神经元之间的连接的权重. \\(j\\)和\\(k\\)的这种排序可能看起来很奇怪, 交换\\(j\\)和\\(k\\)指数会更有意义吗? 使用这种顺序的一大优点是，这使得第三层神经元的激活向量可以做如下表示:  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/46.png?raw=true)  
 公式中\\(a\\)表示第二层神经元的激活向量, 我们将\\(a\\)与权重矩阵\\(w\\)相乘, 然后加上偏置向量\\(b\\), 然后我们对得到的向量的每个元素应用\\(\sigma\\)函数, 得到\\(a^{/}\\). 很容易证明, 公式(22)得到的结果跟公式(4)在计算S型神经元的输出上得到的结果是一致的.  
+有了以上做铺垫, 写出计算神经网络输出的代码就很显然了, 我们先定义sigmoid函数:  
+```
+def sigmoid(z):
+    return 1.0/(1.0+np.exp(-z))
+```  
+当输入是向量是, Numpy会自动的对每一个元素调用sigmoid函数, 得到一个向量.  
+接下来我们在类```Network```中加入一个前馈函数, 当给定一个网络的输入时, 可以得到对应的输出. 这个函数就是针对网络的每一层执行公式(22):  
+```
+    def feedforward(self, a):
+        """Return the output of the network if "a" is input."""
+        for b, w in zip(self.biases, self.weights):
+            a = sigmoid(np.dot(w, a)+b)
+        return a
+```  
+
