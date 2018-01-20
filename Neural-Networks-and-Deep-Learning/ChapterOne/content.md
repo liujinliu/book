@@ -401,3 +401,167 @@ def sigmoid_prime(z):
     """Derivative of the sigmoid function."""
     return sigmoid(z)*(1-sigmoid(z))
 ```  
+我们训练好的神经网络效果怎么样呢? 我们先从下载MINIST数据开始, 我们通过一个脚本```mnist_loader.py```来做这件事:  
+```
+>>> import mnist_loader
+>>> training_data, validation_data, test_data = \
+... mnist_loader.load_data_wrapper()
+```  
+接下来建立一个包含30个隐藏神经元的网络:  
+```
+>>> import network
+>>> net = network.Network([784, 30, 10])
+```  
+接下来从MINIST的训练集合中选出30批数据, 每批数据大小是10, 学习速率\\(\eta = 3.0\\).  
+```
+>>> net.SGD(training_data, 30, 10, 3.0, test_data=test_data)
+```  
+需要说的一点是如果你按照上面的步骤执行下来的话, 运行代码会花费一些时间, 大概几分钟. 如果你着急的话, 可以减少训练数据的数量, 或是减少神经元的数量. 实际生产中, 神经网络训练起来很快, 我们这个代码只是为了让你理解神经网络学习的过程, 而不是构建一个高速的算法和代码. 当然, 一旦我们训练好了之后, 神经网络工作起来会很快. 假设我们已经训练好了神经网络, 即得到了合适的权重和偏置. 那么我们就可以将这个网络移植到浏览器上使用JavaScript来运行, 或是集成到手机app上. 下面展示了在训练过程中的输出, 输出显示了在每一批训练过后, 从10000个测试数据里成功识别的个数. 可以看到的, 仅仅是训练一批之后, 就从10000张图片里准确识别了9129张. 随着训练的进行, 识别成功率还在不断增加.  
+```
+Epoch 0: 9129 / 10000
+Epoch 1: 9295 / 10000
+Epoch 2: 9348 / 10000
+...
+Epoch 27: 9528 / 10000
+Epoch 28: 9542 / 10000
+Epoch 29: 9534 / 10000
+```  
+初步来看, 我们的训练的神经网络识别率达到了95%以上, 这对于初次尝试, 还是很让人兴奋的. 需要说的是, 因为我们选择初始化权重和偏置是随机的, 因此你跑这个程序的时候, 得到的结果肯定和我不太一样. 为了得到这个结果, 我跑了三次, 取了效果最好的一次.  
+让我们再次回到实验中来, 这一次我们将隐藏层神经元的数量提高到100, 这次实验将会耗费比较多时间, 在作者电脑上, 每一批训练大概要几十秒. 所以你最好在程序运行时继续阅读这篇文章. 不要干等着.  
+```
+>>> net = network.Network([784, 100, 10])
+>>> net.SGD(training_data, 30, 10, 3.0, test_data=test_data)
+```  
+你也许猜到了, 这次效果要比之前好, 准确率提到了96%以上. 这说明, 至少在我们这个场景下, 多些隐藏神经元是有益的.  
+当然, 为了得到上述精度, 我挑选了训练的批数, 每一批数据的大小, 学习速率\\(\eta\\). 这些我称之为hyper-parameters, 以区别于权重和偏置(我们需要神经网络学习的内容). 如果hyper-parameters我们取的不好, 我们将得到让人失望的结果. 比如说, 我们取了\\(\eta = 0.001\\),  
+```
+>>> net = network.Network([784, 100, 10])
+>>> net.SGD(training_data, 30, 10, 0.001, test_data=test_data)
+```  
+程序运行起来大概像下面这样.  
+```
+Epoch 0: 1139 / 10000
+Epoch 1: 1136 / 10000
+Epoch 2: 1135 / 10000
+...
+Epoch 27: 2101 / 10000
+Epoch 28: 2123 / 10000
+Epoch 29: 2142 / 10000
+```  
+你可以看到, 结果在一点点改善, 但速度很慢. 这说明我们应该提高学习速率\\(\eta\\), 然后我们会得到好一点的效果, 我们继续这个操作, 最好我们大概会选择\\(\eta = 1\\), 也可能到\\(\eta = 3\\), 这样我们距离一开始的结果就比较接近了. 所以, 即使我们一开始选择了一个不好的hyper-parameter, 我们依然可以有足够的信息去改善选择.  
+通常意义上讲, 训练一个神经网络有时候是很困难的, 尤其是当我们发现选择的hyper-parameters使得网络的训练过程就像是在随机胡猜. 假设我们选择\\(\eta = 100\\):  
+```
+>>> net = network.Network([784, 30, 10])
+>>> net.SGD(training_data, 30, 10, 100.0, test_data=test_data)
+```  
+这样我们得到的过程大概像下面这样  
+```
+Epoch 0: 1009 / 10000
+Epoch 1: 1009 / 10000
+Epoch 2: 1009 / 10000
+Epoch 3: 1009 / 10000
+...
+Epoch 27: 982 / 10000
+Epoch 28: 982 / 10000
+Epoch 29: 982 / 10000
+```  
+现在假设我们上来就遇到了上面的问题. 当然, 根据之前的经验, 我们知道需要减小\\(\eta\\). 但如果是头一次遇到这个问题, 从输出里边我们很难看到有用的信息告诉我们该做什么. 我们当然会怀疑我们的学习速率, 我们甚至会怀疑我们这个神经网络的方方面面. 我们会怀疑是不是初始化选择的权重和偏置太离谱了?或者我们没有足够的数据进行训练?或者我们选择的批数太少了? 或者我们的网络模型本身就不适合用来识别手写数字? 学习速率太低了? 太高了?......当你第一次遇见这种问题, 你总是无法肯定该做什么.  
+可以看到, 调试神经网络像是一门艺术. 我们需要一些直觉, 一些技巧. 我们将在接下来的章节来讨论如何选择合适的hyper-parameters.  
+如果你感兴趣的话, 下面是我用来现在MINIST数据的代码, 注释中说明了存储的格式.  
+```
+"""
+mnist_loader
+~~~~~~~~~~~~
+
+A library to load the MNIST image data.  For details of the data
+structures that are returned, see the doc strings for ``load_data``
+and ``load_data_wrapper``.  In practice, ``load_data_wrapper`` is the
+function usually called by our neural network code.
+"""
+
+#### Libraries
+# Standard library
+import cPickle
+import gzip
+
+# Third-party libraries
+import numpy as np
+
+def load_data():
+    """Return the MNIST data as a tuple containing the training data,
+    the validation data, and the test data.
+
+    The ``training_data`` is returned as a tuple with two entries.
+    The first entry contains the actual training images.  This is a
+    numpy ndarray with 50,000 entries.  Each entry is, in turn, a
+    numpy ndarray with 784 values, representing the 28 * 28 = 784
+    pixels in a single MNIST image.
+
+    The second entry in the ``training_data`` tuple is a numpy ndarray
+    containing 50,000 entries.  Those entries are just the digit
+    values (0...9) for the corresponding images contained in the first
+    entry of the tuple.
+
+    The ``validation_data`` and ``test_data`` are similar, except
+    each contains only 10,000 images.
+
+    This is a nice data format, but for use in neural networks it's
+    helpful to modify the format of the ``training_data`` a little.
+    That's done in the wrapper function ``load_data_wrapper()``, see
+    below.
+    """
+    f = gzip.open('../data/mnist.pkl.gz', 'rb')
+    training_data, validation_data, test_data = cPickle.load(f)
+    f.close()
+    return (training_data, validation_data, test_data)
+
+def load_data_wrapper():
+    """Return a tuple containing ``(training_data, validation_data,
+    test_data)``. Based on ``load_data``, but the format is more
+    convenient for use in our implementation of neural networks.
+
+    In particular, ``training_data`` is a list containing 50,000
+    2-tuples ``(x, y)``.  ``x`` is a 784-dimensional numpy.ndarray
+    containing the input image.  ``y`` is a 10-dimensional
+    numpy.ndarray representing the unit vector corresponding to the
+    correct digit for ``x``.
+
+    ``validation_data`` and ``test_data`` are lists containing 10,000
+    2-tuples ``(x, y)``.  In each case, ``x`` is a 784-dimensional
+    numpy.ndarry containing the input image, and ``y`` is the
+    corresponding classification, i.e., the digit values (integers)
+    corresponding to ``x``.
+
+    Obviously, this means we're using slightly different formats for
+    the training data and the validation / test data.  These formats
+    turn out to be the most convenient for use in our neural network
+    code."""
+    tr_d, va_d, te_d = load_data()
+    training_inputs = [np.reshape(x, (784, 1)) for x in tr_d[0]]
+    training_results = [vectorized_result(y) for y in tr_d[1]]
+    training_data = zip(training_inputs, training_results)
+    validation_inputs = [np.reshape(x, (784, 1)) for x in va_d[0]]
+    validation_data = zip(validation_inputs, va_d[1])
+    test_inputs = [np.reshape(x, (784, 1)) for x in te_d[0]]
+    test_data = zip(test_inputs, te_d[1])
+    return (training_data, validation_data, test_data)
+
+def vectorized_result(j):
+    """Return a 10-dimensional unit vector with a 1.0 in the jth
+    position and zeroes elsewhere.  This is used to convert a digit
+    (0...9) into a corresponding desired output from the neural
+    network."""
+    e = np.zeros((10, 1))
+    e[j] = 1.0
+    return e
+```  
+## 迈向深度学习
+我们的神经网络给出让人印象深刻的表现, 但过程是有些神秘的. 我们初始化时候随机选择了权重和偏置, 然后合适的权重和偏置在学习的过程中由网络自己来改进. 我们没法立刻解释清楚神经网络是如何做到的. 我们是否可以找到一种方法来理解我们的神经网络是如何识别手写数字的? 有了这样的方法, 我们是否可以做的更好?  
+让我说的更明显一点, 假设神经网络的研究最终带来了人工智能. 我们能理解人工智能网络是如何工作的么? 网络对我们来说也许是不透明的, 我们不理解的权重和偏置, 他们自动学习出来了. 在人工智能早期, 人们希望建立人工智能的努力可以帮助我们理解人类大脑思考背后的原理. 但我得说, 也许最终我们既无法理解人脑是如何工作, 我们也无法理解人工智能是如何工作的.  
+为了解答这些问题, 我们回想下我在本章开始阶段对人工神经元的解释---一种根据输入衡量输出的手段. 假设我们接下来要从下面识别出人脸来.  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/47.png?raw=true)  
+就像我们处理之前的识别手写数字的图片一样, 我们依然可以采用像素点的强度作为输入. 然后输出是一个判断, "是的, 这是人脸"或者"不是, 这不是人脸".  
+现在我们先来手动设计下这个网络. 忘掉我们之前的神经网络那些东西, 我们分解问题. 我们可以将识别人脸分解成下面的一些子问题: 在图片左上有个眼睛么?在图片右上有个眼睛么?在图片中间部分有个鼻子么? 在图片下部中间位置有个嘴么?有头发么?等等等等.  
+如果大部分的子问题都是"YES", 或者是比较大的概率是"YES", 那么我们可以认为这是人脸图片. 相反, 如果大部分的子问题都无法得到肯定的回答, 那么这个图片应该不是一个人脸.  
+当然, 这种设计太粗糙了, 比如, 图片上的人可能没有头发, 或者我们可能只看到了部分的脸, 有可能是一个天使的图片. 不过这启发我们如果可以采用神经网络解决一个个子问题, 然后我们就可以再组合成一个网络来进行人脸的判断. 这是一种的设计方法. 当然, 实际中不一定是这么干的, 但这依然给了我们一个如何设计网络架构的启发, 下面是我们设想的框架:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterOne/img/48.png?raw=true)  
