@@ -17,3 +17,9 @@
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/3.png?raw=true)  
 学习速率依然选择\\(\eta = 0.15\\), 从上面的曲线可以看到初始时候学习的很慢. 但训练的批数大概过了一半之后, 学习就大大加快了.  
 上面这个曲线在我们人类看来是很奇怪的. 我在本章开始的时候提到, 当我们明确知道我们错了的时候, 我们学习的很快, 但我们这个神经元一开始不仅表现的输出错的离谱, 而且学习起来还很慢. 而且, 事实上这个不仅存在于我们这个简单的神经元模型中, 在一般的神经网络中也是存在的. 这是为什么? 我们可以做什么来改进这一点呢?  
+考虑到我们的神经元是根据两个偏微分来改变权重和偏置, 也就是\\(\partial C / \partial w\\)和\\(\partial C / \partial b\\). 因此说"学习速度慢", 其实就是这些偏微分的值小. 我们下面将给出计算偏微分的公式. 我们采用quadratic cost function, 即公式(6), 可以得到:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/4.png?raw=true)  
+\\(a\\)是输入\\(x=1\\)时, 神经元的输出, \\(y=0\\)是对应的需要的输出. 为了更明显一点, 我们还记得\\(a = \sigma (z)\\), \\(z=wx+b\\). 应用微分的链式传导法则可以得到:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/5.png?raw=true)  
+因为我将\\(a=1, y=0\\)代入了, 因此才可以得到最右边的公式. 我们将会进一步研究\\({\sigma}^/ (z)\\). 现在我们回顾下\\(\sigma\\)函数的图形的样子:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/5.png?raw=true)  
