@@ -35,3 +35,9 @@
 上面的公式并不能很直观的看出来解决了我们之前提到的问题, 甚至作为一个代价函数也不是很直观. 我们先来解释他如何作为一个代价函数吧.  
 函数所具有的两个属性使他可以被用作代价函数, 首先, 他是非负, 因为对于这个求和操作的每一个独立的元素都是小于0的(\\(0<a<1\\)). 然后前面的因子\\(\frac{-1}{n}\\)是负, 因此整个代价函数是恒小于0的.  
 然后, 还可以看到, 当神经元的输出跟想要的输出越接近, 这个函数的值就越接近0. 我们假设训练数据\\(a \approx 0\\), 同时我们希望的输出是0. 当神经网络是按我们预想工作的时候, 输入输出就是这样的. 这样, 公式(57)中的第一部分就是0了. 第二部分也会趋向0, 因为第二部分趋向于\\(-\ln 1\\). 当想要的输出是1, 同时\\(a \approx 1\\)可以得到类似的结论.  
+总结来说, 交叉熵(cross-entropy)函数是恒为正数, 并且结果越趋近0, 表明神经网络的输出越接近我们想要的输出. 这两个特性正是它可以作为代价函数使用的原因. 当然跟之前我们采用的代价函数想比, 交叉熵函数还具有个更吸引人的特性就是他可以避免前面的学习变慢的问题. 为了说明这个问题, 我们计算交叉熵函数对权重的偏微分. 将\\(a = \sigma (z)\\)代入公式(57), 并且应用链式法则我们可以得到:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/9.png?raw=true)  
+对上面的公式进行化简可以得到:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/10.png?raw=true)  
+考虑到\\(\sigma (z) = 1/(1+ e^{-z} )\\), 可以得到\\({\sigma}^/ = \sigma (z) (1 - \sigma  (z))\\), 上面的公式被进一步简化为:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/11.png?raw=true)  
