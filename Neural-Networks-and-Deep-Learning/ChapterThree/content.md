@@ -41,3 +41,15 @@
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/10.png?raw=true)  
 考虑到\\(\sigma (z) = 1/(1+ e^{-z} )\\), 可以得到\\({\sigma}^/ = \sigma (z) (1 - \sigma  (z))\\), 上面的公式被进一步简化为:  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/11.png?raw=true)  
+上面这个表达式简直美极了. 我们可以看到权重迭代学习的速率取决于\\(\sigma (z) - y\\), 也就是输出与实际的差值. 差值越大, 神经元学习的越快. 这正是我们想要的. 同样的, 我们可以得到下面偏置迭代学习的公式:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/12.png?raw=true)  
+现在, 让我们采用交叉熵函数来做代价函数, 重新训练我们之前提到的单一神经元. 首先选择初始化权重为0.6, 初始化偏置为0.9  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/13.png?raw=true)   
+跟之前一样, 学习的速率很快, 这没什么让人兴奋的. 我们来看之前我们表现糟糕的情况,  选择初始的权重和偏置为2  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/14.png?raw=true)   
+结果很让人满意, 学习速率变得很快.  
+我在换了代价函数后, 没有说采用的\\(\eta \\)是多少. 在采用老的代价函数时, \\(\eta = 0.15\\). 我们是否需要在新的模型里也使用同样的\\(\eta \\)呢? 其实这很难比较, 因为代价函数变了. 事实上, 在换了代价函数后, 我选择的\\(\eta = 0.005\\).  
+事实上我们之前关注的一直是神经元在输出明显错误时候的学习速率, 而并非整个学习过程运行的绝对速率, 因此, 这时候讨论\\(\eta\\)是没有太大意义的.  
+交叉熵代价函数很容易推广到多个神经元, 多层网络的场景. 假设\\(y = y_1, y_2,.....\\)是我们希望得到的输出. \\(a_1^L,  a_2^L...\\)是神经元的实际输出. 交叉熵函数可以定义如下:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/15.png?raw=true)   
+顺便说下, 我一直使用的交叉熵这个词, 可能会让人有点疑惑, 因为你可能在其他地方也听说过这个词. 实际上, 我们可以借助于定义两个变量的随机分布来理解他. \\(p_j, q_j\\), 他们的随机分布公式为 \\(\sum_j p_j \ln q_j\\) 
