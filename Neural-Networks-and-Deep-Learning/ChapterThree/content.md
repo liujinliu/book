@@ -24,7 +24,7 @@
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/5.png?raw=true)  
 因为我将\\(a=1, y=0\\)代入了, 因此才可以得到最右边的公式. 我们将会进一步研究\\({\sigma}^/ (z)\\). 现在我们回顾下\\(\sigma\\)函数的图形的样子:  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/6.png?raw=true)  
-从图上我们可以看到, 当神经元的输出接近1时, 函数变的很平缓, 也就是说\\({\sigma}^/ (z)\\)很小. 通过公式(55)和(56)可以得到\\(\partial C / \parital w\\)和\\(\partial C / \parital b\\)也会很小. 这正是神经元学习变慢的原因. 接下来我们将看到, 对与一般意义上的神经网络, 这个结论也是存在的.  
+从图上我们可以看到, 当神经元的输出接近1时, 函数变的很平缓, 也就是说\\({\sigma}^/ (z)\\)很小. 通过公式(55)和(56)可以得到\\(\partial C / \partial w\\)和\\(\partial C / \partial b\\)也会很小. 这正是神经元学习变慢的原因. 接下来我们将看到, 对与一般意义上的神经网络, 这个结论也是存在的.  
 
 ### 引入交叉熵代价函数(cross-entropy cost function)
 如何解决前面提到的学习变慢的问题呢? 我们可以通过引入一种新的代价函数--交叉熵代价函数. 为了理解交叉熵, 我们来看下面的模型. 这个模型有多个输入\\(x_1, x_2,....,\\), 相应的权重为\\(w_1, w_2, ....,\\), 偏置为\\(b\\).  
