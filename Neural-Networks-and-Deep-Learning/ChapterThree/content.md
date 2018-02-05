@@ -87,4 +87,12 @@
 当然, 我们的输入不止一个, 因此推广开来在输入上取平均得到下面的式子:  
 ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/21.png?raw=true)   
 这里的constant是在所有输入上取平均的constant. 好的, 我们得到了交叉熵函数, 这证明了交叉熵函数不是我们凭空捏造的. 我们可以很自然很简单的发现他.  
-关于交叉熵更直观的解释是什么呢? 深入解释这一点将会比较困难. 然后, 还是有必要提一下, 关于交叉熵的标准解释来自与信息论. 简单来说, 交叉熵用来衡量不确定性. 我们的神经网络是要计算下面的函数\\(x \rightarrow y = y(x)\\). 而信息论其实是计算这个函数\\(x \rightarrow a = a(x)\\). 假设我们认为a是我们网络输出y是1的概率, \\(1-a\\)是输出0的概率. 那么, 交叉熵函数就是衡量结果在多大程度上让我们"surprised"的程度.  一般来说, 但我们得到的输出就是我们想要的, 我们不会感到很"surprised", 如果输出跟我们想要的相差比较远, 我们就会感觉很"surprised". 在信息论中, 对"surprised"的定义会有更明确的解释. 抱歉我不知道如何简短的明确的解释这个概念. 在Wikipedia上有关于这个的一个[简单描述](https://en.wikipedia.org/wiki/Cross_entropy#Motivation), 另外如果还想了解更多细节, 可以参考[Cover and Thomas](http://books.google.ca/books?id=VWq5GG6ycxMC)所著信息论的第五章.  
+关于交叉熵更直观的解释是什么呢? 深入解释这一点将会比较困难. 然后, 还是有必要提一下, 关于交叉熵的标准解释来自于信息论. 简单来说, 交叉熵用来衡量不确定性. 我们的神经网络是要计算下面的函数\\(x \rightarrow y = y(x)\\). 而信息论其实是计算这个函数\\(x \rightarrow a = a(x)\\). 假设我们认为a是我们网络输出y是1的概率, \\(1-a\\)是输出0的概率. 那么, 交叉熵函数就是衡量结果在多大程度上让我们"surprised"的程度.  一般来说, 但我们得到的输出就是我们想要的, 我们不会感到很"surprised", 如果输出跟我们想要的相差比较远, 我们就会感觉很"surprised". 在信息论中, 对"surprised"的定义会有更明确的解释. 抱歉我不知道如何简短的明确的解释这个概念. 在Wikipedia上有关于这个的一个[简单描述](https://en.wikipedia.org/wiki/Cross_entropy#Motivation), 另外如果还想了解更多细节, 可以参考[Cover and Thomas](http://books.google.ca/books?id=VWq5GG6ycxMC)所著信息论的第五章.  
+### Softmax  
+本章我们主要是采用交叉熵函数来解决学习速率慢的问题. 但我还是想大致的描述另外一个方法, softmax神经元层. 我们并不打算马上采用softmax层, 所以, 如果你着急, 你可以跳过这部分. 但是, softmax依然是值得去了解下的. 一方面是这个东西挺有意思, 另外一个原因是在第六章我们介绍深度学习网络时, 会采用softmax.  
+softmax的想法来自于想给我们的神经网络定一个不同的输出层. 就像我们在S型神经元用到的. 定义加权输入为\\(z_j^L = \sum_k w_{jk}^L a_k^{L-1} + b_j^L\\). 但是我们得到输出所采用的公式略有不同, 我们在softmax层对\\(z_j^L\\)应用softmax函数, 我们得到第j个输出神经元的激励\\(a_J^L\\)为:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/22.png?raw=true)   
+分母是我们在所有输出上取和.  
+如果你对softmax函数不熟悉. 那么公式(78)看起来将会很晦涩. 很难一样看出来这是我们想要的. 而且很难直观的看出来这有助于我们解决神经元学习速率慢的问题. 为了更好的理解公式(78), 假设我们有一个神经网络, 有四个输出. 相应的有四个加权输入, \\(z_1^L, z_2^L, z_3^L, z_4^L\\). 下面的图左边是可能的输入(强烈建议去作者原链接去看下这个图), 拉动滑块可以改变输入的大小, 右边是对应的输出.  开始我们试着拉动滑块增大\\(z_4^L\\):  
+ ![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/23.png?raw=true)   
+ 
