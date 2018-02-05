@@ -70,4 +70,21 @@
 说明一下, ```net.large_weight_initializer()```用来对权重和偏置进行初始化, 初始化的方式与第一章一样. 我们在一会儿还会修改这个初始化方式, 但是现在先让我们维持原样. 我们这次得到的识别准确率有95.49%, 跟我们在第一章使用quadratic cost得到的结果差不多.  
 当我们将隐藏神经元的数量提到100时, 这次我们得到了96.82%的准确率. 这比我们在第一章时候得到的96.59%的准确率要高了一些. 这看起来只是一个很小的提升, 但是如果看错误率的话, 我们看到, 错误率从3.41%降到了3.18%, 还是很可观的.  
 看起来交叉熵代价函数确实是一个更好的选择. 然而目前还不能确定交叉熵足够优秀, 接下来我们将会花费一些精力去学习如何选择学习速率, 控制每一批学习数据的大小等. 我们会看到, 交叉熵代价函数绝对是一个更好的选择.  
-
+顺便说一句, 目前我们讲到的是我们这一章将要介绍的一般性方法的一部分. 接下来, 我们将会介绍一些新的技术, 可以帮助我们得到更好的结果. 看到结果得到改进总是令人兴奋的, 但如何解释这种改进通常是个棘手的问题. 我们通常都要耗费很多工作在优化其他hyper-parameters上, 然后才可以看到在结果上的改进. 这将需要强大的计算能力, 甚至耗费很长的时间. 我们在本章将会在一些基础模型上讨论优化方法, 但你要记住, 这些测试没有经过严格的论证, 现实中要保持警惕, 因为很多时候进展并非像教程中说的这般顺利.  
+好了, 我们将交叉熵已经够多的了. 为什么要讲这么多在这上面? 尤其是考虑到这只带来了一点点很小的改进. 接下来我们将会讲到其他的技术, 特别介绍下--regularization, 这将会给我们带来很大的改进. 那么, 为什么花这么多精力介绍交叉熵代价函数呢? 部分原因是交叉熵函数是一个使用很广泛的代价函数, 这值得我们去多了解一些. 但更重要的原因是神经元学习速度慢是一个很普遍的问题, 我们在本章会一遍一遍的反复看这个问题. 我花了这么多话介绍交叉熵函数是因为在解决神经元学习速度慢上这是一种方法.  
+### 交叉熵从何而来  
+目前为止, 我们对交叉熵的讨论一直是代数上的, 实际应用上的. 这很有用, 但依然还有些问题没有回答. 比如: 交叉熵到底是什么意思? 有没有更直观的解释? 交叉熵这个概念是如何第一次出现在我们脑海中的呢?  
+让我们从最后一个问题开始. 假设我们发现了神经网络学习速率很慢的问题, 并且我们确定根源在公式(55)和(56)中的\\({\delta}^/ (x)\\). 盯着这些公式看一会儿之后(可能是好一会儿), 我们可能会想, 如果能让\\({\delta}^/ (x)\\)消失就好了. 这样的话, 对输入单一的输入\\(x\\), 代价\\(C = C_x\\)将会满足下面的公式:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/16.png?raw=true)   
+如果我们找到一个代价函数使得上面的设想成真, 我们显然可以得到一个神经网络, 越是错误明显越是学习的快. 接下来你将会看到, 基于上面的公式,我们最终可以得到交叉熵. 根据链式法则, 我们得到:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/17.png?raw=true)   
+代入\\({\delta}^/ (z) = \delta (z) (1 - \delta (z))=a(1-a)\\)上面的公式变为:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/18.png?raw=true)   
+比照公式(72)我们得到:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/19.png?raw=true)   
+在a上积分得到:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/20.png?raw=true)   
+当然, 我们的输入不止一个, 因此推广开来在输入上取平均得到下面的式子:  
+![这里写图片描述](https://github.com/liujinliu/book/blob/master/Neural-Networks-and-Deep-Learning/ChapterThree/img/21.png?raw=true)   
+这里的constant是在所有输入上取平均的constant. 好的, 我们得到了交叉熵函数, 这证明了交叉熵函数不是我们凭空捏造的. 我们可以很自然很简单的发现他.  
+关于交叉熵更直观的解释是什么呢? 深入解释这一点将会比较困难. 然后, 还是有必要提一下, 关于交叉熵的标准解释来自与信息论. 简单来说, 交叉熵用来衡量不确定性. 我们的神经网络是要计算下面的函数\\(x \rightarrow y = y(x)\\). 而信息论其实是计算这个函数\\(x \rightarrow a = a(x)\\). 假设我们认为a是我们网络输出y是1的概率, \\(1-a\\)是输出0的概率. 那么, 交叉熵函数就是衡量结果在多大程度上让我们"surprised"的程度.  一般来说, 但我们得到的输出就是我们想要的, 我们不会感到很"surprised", 如果输出跟我们想要的相差比较远, 我们就会感觉很"surprised". 在信息论中, 对"surprised"的定义会有更明确的解释. 抱歉我不知道如何简短的明确的解释这个概念. 在Wikipedia上有关于这个的一个[简单描述](https://en.wikipedia.org/wiki/Cross_entropy#Motivation), 另外如果还想了解更多细节, 可以参考[Cover and Thomas](http://books.google.ca/books?id=VWq5GG6ycxMC)所著信息论的第五章.  
