@@ -1,5 +1,7 @@
 ﻿---
 title: 本地DynamoDB的启动方法
+date: 2018-01-18
+categories: database
 ---
 从http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_2016-05-17.tar.gz下载DynamoDB的按照包，本地jre环境的配置请自行配置
 ```
