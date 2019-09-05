@@ -32,14 +32,16 @@ tmpfs                  2041469      1   2041468    1% /dev/shm
 /var/tmp
 1
 ```
-通过这个方法，最终发现是```/var/spool/postfix/maildrop```目录下小文件过多。  
+通过这个方法，最终发现是"/var/spool/postfix/maildrop"目录下小文件过多。  
 通过上网搜索，原因如下： 
 ```
 是由于linux在执行cron时，会将cron执行脚本中的output和warning信息，都会以邮件的形式发送Cron所有者，  
 而由于客户环境中的sendmail和postfix没有正常运行，导致邮件发送不成功，全部小文件堆积在了maildrop目录 
 下面，而且没有自动清理转换的机制，所以此目录堆积了大量的文件
 ```
-进入```/var/spool/postfix/maildrop```路径，使用```ls | xargs -n 10 rm -rf ```将文件清楚，问题得以恢复。
+进入"/var/spool/postfix/maildrop"路径，使用
+```ls | xargs -n 10 rm -rf ```
+将文件清楚，问题得以恢复。
 
 ### 根本解决方法
 ```
