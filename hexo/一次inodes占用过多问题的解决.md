@@ -42,7 +42,9 @@ tmpfs                  2041469      1   2041468    1% /dev/shm
 下面，而且没有自动清理转换的机制，所以此目录堆积了大量的文件
 ```
 进入"/var/spool/postfix/maildrop"路径，使用
-```ls | xargs -n 10 rm -rf ```
+```
+ls | xargs -n 10 rm -rf 
+```
 将文件清楚，问题得以恢复。
 
 ### 根本解决方法
