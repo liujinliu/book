@@ -14,7 +14,7 @@ system-info: ubuntu16.04
 ```
 echo "deb http://www.apache.org/dist/cassandra/debian 310x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
 ```
-这里的```310x```可以自行选择，我安装时候官网给的例子是36x
+这里的310x可以自行选择，我安装时候官网给的例子是36x
 依次执行的下面的命令进行按照
 ```
 curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
@@ -27,7 +27,8 @@ sudo apt-get update
 ```
 时候[报错的处理办法](http://cassandra.apache.org/doc/latest/getting_started/installing.html)，我当时没遇到什么报错。
 使用
-```nodetool status
+```
+nodetool status
 ```
 可以查看的节点的启动状态
 节点的启动/停止/重启命令是
