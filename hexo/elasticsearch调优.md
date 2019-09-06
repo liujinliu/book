@@ -39,7 +39,7 @@ curl  -XPUT "http://<ip>:9200/_cluster/settings" -d
 ``` 
 
 ### 刷新频率调优
-大批量插入时，修改refresh_interval到-1（不刷新）或大于1s的时间，减少shard刷新间隔
+大批量插入时，修改refresh_interval到-1（不刷新）或大于1s的时间，减少shard刷新间隔  
 ```
 curl -XPUT 'http://<ip>:9200/dw-search/_settings' -d '{ 
     "index" : { 
@@ -48,7 +48,7 @@ curl -XPUT 'http://<ip>:9200/dw-search/_settings' -d '{
 }'
 ```
 
-插入完成后修改回默认值1s
+插入完成后修改回默认值1s  
 ```
 curl -XPUT 'http://10.1.*.*:9200/dw-search/_settings' -d '{ 
     "index" : { 
@@ -58,11 +58,11 @@ curl -XPUT 'http://10.1.*.*:9200/dw-search/_settings' -d '{
 ```
 另外下面的文章列出了很多有用的url  
 http://blog.csdn.net/u014351782/article/details/51207650
-其中关闭index这个方法在一次故障处理中起了很大的作用，我们发现系统一直报'too many open files'，然后找到elasticsearch进程，发现确实打开了很多句柄，然后调用
+其中关闭index这个方法在一次故障处理中起了很大的作用，我们发现系统一直报'too many open files'，然后找到elasticsearch进程，发现确实打开了很多句柄，然后调用  
 ```
 curl http://localhost:9200/_nodes/process\?pretty
 ```
-发现最大句柄数已经是65530
+发现最大句柄数已经是65530  
 ```
 "max_file_descriptors" : 65530,
 ```
