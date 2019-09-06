@@ -5,7 +5,11 @@ categories: 运维
 ---
 下面是一个通过nsenter进入docker容器的例子脚本：
 文件名字：ns
-使用方法：将文件放入系统PATH路径下，进入容器方式```ns <container-name/container-id>```
+使用方法：将文件放入系统PATH路径下，进入容器方式
+```
+ns <container-name/container-id>
+```
+
 ```
 #!/bin/bash
 if [ -e $(dirname "$0")/nsenter ]; then
