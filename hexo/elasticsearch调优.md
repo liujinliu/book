@@ -36,6 +36,7 @@ curl  -XPUT "http://<ip>:9200/_cluster/settings" -d
             "indices.store.throttle.max_bytes_per_sec": "200mb"
         }
     }'
+
 ``` 
 
 ### 刷新频率调优
