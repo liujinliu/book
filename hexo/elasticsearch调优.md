@@ -26,21 +26,23 @@ categories:
 副本最好设置为2份提高容错性和查询速度，分片设置为节点数量的2倍提高插入速度，如果是大批量导入不做查询的话可取消副本
 
 ### Merge 吞吐量调优
-系统默认是20mb，实际系统性能可能会更好，可适当调整  
+系统默认是20mb，实际系统性能可能会更好，可适当调整 
+
 ```
 curl  -XPUT "http://<ip>:9200/_cluster/settings" -d
-    '{
-        "persistent":
-        {
-            "indices.store.throttle.type": "merge",
-            "indices.store.throttle.max_bytes_per_sec": "200mb"
-        }
-    }'
+'{
+    "persistent":
+    {
+        "indices.store.throttle.type": "merge",
+        "indices.store.throttle.max_bytes_per_sec": "200mb"
+    }
+}'
 
-``` 
+```
 
 ### 刷新频率调优
-大批量插入时，修改refresh_interval到-1（不刷新）或大于1s的时间，减少shard刷新间隔  
+大批量插入时，修改refresh_interval到-1（不刷新）或大于1s的时间，减少shard刷新间隔 
+
 ```
 curl -XPUT 'http://<ip>:9200/dw-search/_settings' -d '{ 
     "index" : { 
@@ -49,21 +51,27 @@ curl -XPUT 'http://<ip>:9200/dw-search/_settings' -d '{
 }'
 ```
 
-插入完成后修改回默认值1s  
+插入完成后修改回默认值1s 
+
 ```
 curl -XPUT 'http://10.1.*.*:9200/dw-search/_settings' -d '{ 
     "index" : { 
         "refresh_interval" : "1s" 
     } 
-}' 
+}'
+ 
 ```
-另外下面的文章列出了很多有用的url  
+
+另外下面的文章列出了很多有用的url 
 http://blog.csdn.net/u014351782/article/details/51207650
-其中关闭index这个方法在一次故障处理中起了很大的作用，我们发现系统一直报'too many open files'，然后找到elasticsearch进程，发现确实打开了很多句柄，然后调用  
+其中关闭index这个方法在一次故障处理中起了很大的作用，我们发现系统一直报'too many open files'，然后找到elasticsearch进程，发现确实打开了很多句柄，然后调用 
+
 ```
 curl http://localhost:9200/_nodes/process\?pretty
 ```
-发现最大句柄数已经是65530  
+
+发现最大句柄数已经是65530 
+
 ```
 "max_file_descriptors" : 65530,
 ```
