@@ -47,6 +47,7 @@ curl -XPUT 'http://<ip>:9200/dw-search/_settings' -d '{
     } 
 }'
 ```
+
 插入完成后修改回默认值1s
 ```
 curl -XPUT 'http://10.1.*.*:9200/dw-search/_settings' -d '{ 
@@ -58,9 +59,13 @@ curl -XPUT 'http://10.1.*.*:9200/dw-search/_settings' -d '{
 另外下面的文章列出了很多有用的url  
 http://blog.csdn.net/u014351782/article/details/51207650
 其中关闭index这个方法在一次故障处理中起了很大的作用，我们发现系统一直报'too many open files'，然后找到elasticsearch进程，发现确实打开了很多句柄，然后调用
-```curl http://localhost:9200/_nodes/process\?pretty```
+```
+curl http://localhost:9200/_nodes/process\?pretty
+```
 发现最大句柄数已经是65530
-```"max_file_descriptors" : 65530,```
+```
+"max_file_descriptors" : 65530,
+```
 果然重启之后，句柄数很快还是飙到了65530，通过关闭index，句柄数得到了显著减少。
 
 本篇博客还参考下面的博客：

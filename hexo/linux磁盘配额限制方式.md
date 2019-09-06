@@ -15,7 +15,9 @@ CONFIG_QUOTACTL=y
 ```
 CONFIG_QUOTA和CONFIG_QUOTACTL两个y，恭喜，你的内核支持quota，否则就要升级或是重新编译内核了，貌似2.4以上的版本内核都支持
 #### 修改内核fstab，对根目录开启磁盘配额限制
-```# vim /etc/fstab```
+```
+# vim /etc/fstab
+```
 ![这里写图片描述](http://img.blog.csdn.net/20161027115636528)
 标出来的地方就是需要新增的地方，这个表示是对根目录进行磁盘配额限制，当然，也可以加在其他行，则是对其他的目录进行磁盘配额限制。
 #### 查看目录挂载位置
@@ -48,7 +50,9 @@ tmpfs           938M   72K  938M   1% /dev/shm
 # groupadd gquota
 ```
 #### 配置对用户组gquota的磁盘配额限制
-```# edquota -g gquota```
+```
+# edquota -g gquota
+```
 ![这里写图片描述](http://img.blog.csdn.net/20161027120951128)
 设置用户组gquota的软限制为480M，硬限制为500M（用户超过软限制会得到报警，超不过硬限制）
 #### 新建用户并加入gquota用户组
@@ -59,15 +63,21 @@ tmpfs           938M   72K  938M   1% /dev/shm
 # su - temp
 ```
 #### 模拟大文件写入
-```# dd if=/dev/zero of=/home/temp/file1 bs=1M count=450```
+```
+# dd if=/dev/zero of=/home/temp/file1 bs=1M count=450
+```
 ![这里写图片描述](http://img.blog.csdn.net/20161027134117449)
 大小没有超过软限制，没有告警
 再次写入
-```# dd if=/dev/zero of=/home/temp/file3 bs=1M count=40```
+```
+# dd if=/dev/zero of=/home/temp/file3 bs=1M count=40
+```
 ![这里写图片描述](http://img.blog.csdn.net/20161027134601486)
 此时已经出现告警
 再次写入
-```# dd if=/dev/zero of=/home/temp/file3 bs=1M count=40```
+```
+# dd if=/dev/zero of=/home/temp/file3 bs=1M count=40
+```
 ![这里写图片描述](http://img.blog.csdn.net/20161027134956569)
 显示写入失败
 #### 查看磁盘分配使用情况

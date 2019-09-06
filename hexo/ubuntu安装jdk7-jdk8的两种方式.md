@@ -13,12 +13,12 @@ ubuntu安装jdk有两种方式
 
 这里记录采用ppa方式安装的方法
 
-###1. 添加ppa
+### 1. 添加ppa
 ```
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 ```
-###2. 安装oracle-java-installer
+### 2. 安装oracle-java-installer
 jdk7
 ```
 sudo apt-get install oracle-java7-installer
@@ -38,7 +38,7 @@ echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | su
 echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
 ```
 
-###3. 设置系统默认jdk
+### 3. 设置系统默认jdk
 ##### jdk7
 ```
 sudo update-java-alternatives -s java-7-oracle
@@ -47,7 +47,7 @@ sudo update-java-alternatives -s java-7-oracle
 ```
 sudo update-java-alternatives -s java-8-oracle
 ```
-###4. 测试jdk是否安装成功
+### 4. 测试jdk是否安装成功
 ```
 java -version
 javac -version
