@@ -19,3 +19,9 @@ echo $!
 ```
 cur_dir=$(cd "$(dirname "$0")"; pwd)
 ```
+
+#### windows换行符换成linux换行符
+```
+dos2unix {filename}
+sed -i 's/\r//g' {filename}
+```
