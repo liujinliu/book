@@ -14,3 +14,8 @@ pstree pid -p| awk -F"[()]" '{print $2}'| xargs kill -9
 nohup {some command} &
 echo $!
 ```
+
+#### shell获取当前运行脚本所在路径
+```
+cur_dir=$(cd "$(dirname "$0")"; pwd)
+```
